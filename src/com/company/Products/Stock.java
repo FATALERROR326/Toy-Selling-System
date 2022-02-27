@@ -30,7 +30,7 @@ public class Stock {
     public double getPrice(String toyName){
         return list.get(toyName).getPrice();
     }
-    public boolean buy(String toyName){
-
-    }
+//    public boolean buy(String toyName){
+//
+//    }
 }
