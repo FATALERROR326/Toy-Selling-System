@@ -4,16 +4,14 @@ import com.company.Products.Stock;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.TimeUnit;
 
 public class MyThreadPool {
     public Stock stock;
     private List<Thread> threadList;
     private int CORE_THREAD_NUM;
-    private MyBlockingQueue<String> workingQueue;
+    private MyBlockingQueue<Runnable> workingQueue;
 
-    public MyThreadPool(Stock stock, int CORE_THREAD_NUM, MyBlockingQueue<String> workingQueue) {
+    public MyThreadPool(Stock stock, int CORE_THREAD_NUM, MyBlockingQueue<Runnable> workingQueue) {
         this.stock = stock;
         this.threadList = new ArrayList<>();
         this.CORE_THREAD_NUM = CORE_THREAD_NUM;
@@ -26,14 +24,15 @@ public class MyThreadPool {
             threadList.add(t);
             t.start();
         }
+
     }
     public void end(){
         for(Thread t : threadList){
             t.interrupt();
         }
     }
-    public void execute(String request) throws InterruptedException {
-        workingQueue.put(request);
+    public void execute(Runnable runnable) throws InterruptedException {
+        workingQueue.put(runnable);
     }
 
 

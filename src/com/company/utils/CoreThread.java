@@ -6,7 +6,7 @@ public class CoreThread extends Thread implements MyThread{
     private Stock stock;
     private MyBlockingQueue<String> workingQueue;
 
-    public CoreThread(Stock stock, MyBlockingQueue<String> workingQueue) {
+    public CoreThread(Stock stock, MyBlockingQueue<Runnable> workingQueue) {
         this.stock = stock;
         this.workingQueue = workingQueue;
     }
@@ -35,8 +35,8 @@ public class CoreThread extends Thread implements MyThread{
     @Override
     public void run(){
         while(true){
-            String toyName = workingQueue.take();
-            Query(toyName);
+            Runnable handler = workingQueue.take();
+            handler.run();
         }
     }
 }
