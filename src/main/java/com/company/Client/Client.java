@@ -1,7 +1,6 @@
 package com.company.Client;
 
-public class Client {
-    public static void main() {
+import java.net.Socket;
 
-    }
+public class Client {
 }
