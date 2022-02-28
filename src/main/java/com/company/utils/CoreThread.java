@@ -3,11 +3,9 @@ package com.company.utils;
 import com.company.Products.Stock;
 
 public class CoreThread extends Thread{
-    private Stock stock;
     private MyBlockingQueue<Runnable> workingQueue;
 
-    public CoreThread(Stock stock, MyBlockingQueue<Runnable> workingQueue) {
-        this.stock = stock;
+    public CoreThread(MyBlockingQueue<Runnable> workingQueue) {
         this.workingQueue = workingQueue;
     }
 

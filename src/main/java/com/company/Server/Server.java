@@ -15,7 +15,7 @@ import java.net.Socket;
 import java.util.concurrent.ArrayBlockingQueue;
 
 public class Server {
-    public Stock stock;
+    public volatile Stock stock;
     public static final int CORE_SIZE = 3;
     public ServerSocket serverSocket;
     public Server() throws IOException {
@@ -37,7 +37,7 @@ public class Server {
         while(true){
             Socket clientSocket = serverSocket.accept();
             //For every accepted socket, put it into the blocking queue with the runnable task
-            threadPool.execute(new Handler(clientSocket));
+            threadPool.execute(new Handler(clientSocket, server.stock));
         }
 
     }
