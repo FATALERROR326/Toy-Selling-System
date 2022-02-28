@@ -19,12 +19,10 @@ public class MyBlockingQueue<T> {
         lock = new ReentrantLock();
         read = lock.newCondition();
         write = lock.newCondition();
-
     }
 
-    public T take() throws InterruptedException {
-        //Acquire the lock but can be interrupted during blocking or waiting
-        lock.lockInterruptibly();
+    public T take(){
+        lock.lock();
         T t = null;
         try{
             while(deque.size() == 0){
@@ -39,8 +37,8 @@ public class MyBlockingQueue<T> {
             return t;
         }
     }
-    public void put(T t) throws InterruptedException {
-        lock.lockInterruptibly();
+    public void put(T t){
+        lock.lock();
         try{
             while(deque.size() == SIZE){
                 write.await();
