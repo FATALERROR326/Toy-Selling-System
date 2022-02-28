@@ -21,8 +21,8 @@ public class MyBlockingQueue<T> {
         write = lock.newCondition();
     }
 
-    public T take(){
-        lock.lock();
+    public T take() throws InterruptedException {
+        lock.lockInterruptibly();
         T t = null;
         try{
             while(deque.size() == 0){
@@ -37,8 +37,8 @@ public class MyBlockingQueue<T> {
             return t;
         }
     }
-    public void put(T t){
-        lock.lock();
+    public void put(T t) throws InterruptedException {
+        lock.lockInterruptibly();
         try{
             while(deque.size() == SIZE){
                 write.await();
