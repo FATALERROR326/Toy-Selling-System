@@ -9,6 +9,7 @@ public class MyThreadPool {
     public Stock stock;
     private List<Thread> threadList;
     private int CORE_THREAD_NUM;
+    //The blocking queue based on the producer-consumer mode
     private MyBlockingQueue<Runnable> workingQueue;
 
     public MyThreadPool(Stock stock, int CORE_THREAD_NUM, MyBlockingQueue<Runnable> workingQueue) {

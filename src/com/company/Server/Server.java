@@ -25,18 +25,18 @@ public class Server {
         stock.register(new Whale("Whale", (float) 39.9), 100);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Server server = new Server();
         ServerSocket serverSocket = server.serverSocket;
         MyThreadPool threadPool = new MyThreadPool(
                 server.stock,
                 CORE_SIZE,
-                new MyBlockingQueue<String>(20)
+                new MyBlockingQueue<Runnable>(20)
         );
         threadPool.start();
         while(true){
             Socket clientSocket = serverSocket.accept();
-
+            //For every accepted socket, put it into the blocking queue with the runnable task
             threadPool.execute(new Handler(clientSocket));
         }
 

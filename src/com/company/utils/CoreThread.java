@@ -4,7 +4,7 @@ import com.company.Products.Stock;
 
 public class CoreThread extends Thread implements MyThread{
     private Stock stock;
-    private MyBlockingQueue<String> workingQueue;
+    private MyBlockingQueue<Runnable> workingQueue;
 
     public CoreThread(Stock stock, MyBlockingQueue<Runnable> workingQueue) {
         this.stock = stock;
