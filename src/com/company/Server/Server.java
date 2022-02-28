@@ -19,7 +19,7 @@ public class Server {
     public static final int CORE_SIZE = 3;
     public ServerSocket serverSocket;
     public Server() throws IOException {
-        serverSocket = new ServerSocket(8080);
+        serverSocket = new ServerSocket(8088);
         stock = new Stock();
         stock.register(new Tux("Tux", (float) 29.9), 100);
         stock.register(new Whale("Whale", (float) 39.9), 100);

@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
 
+
 public class Handler implements Runnable {
     private Socket client;
     public Handler(Socket client){
@@ -17,6 +18,7 @@ public class Handler implements Runnable {
             //Input stream from client socket
             BufferedReader buf = new BufferedReader(new InputStreamReader(client.getInputStream()));
             boolean flag = true;
+
             while(flag){
 
             }

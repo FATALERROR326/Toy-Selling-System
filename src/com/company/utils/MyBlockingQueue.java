@@ -22,6 +22,7 @@ public class MyBlockingQueue<T> {
     }
 
     public T take() throws InterruptedException {
+        //Take a task into the queue if queue is not empty or the thread will be blocked
         lock.lockInterruptibly();
         T t = null;
         try{
@@ -38,7 +39,8 @@ public class MyBlockingQueue<T> {
         }
     }
     public void put(T t) throws InterruptedException {
-        lock.lockInterruptibly();
+        //Put a task into the queue if queue is not full or the thread will be blocked
+        lock.lock();
         try{
             while(deque.size() == SIZE){
                 write.await();
