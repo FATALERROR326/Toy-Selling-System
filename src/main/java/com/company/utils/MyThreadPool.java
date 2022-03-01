@@ -21,7 +21,8 @@ public class MyThreadPool {
     }
     public void start(){
         for(int i=0; i<CORE_THREAD_NUM; i++){
-            Thread t = new CoreThread(stock, workingQueue);
+            //Thread t = new CoreThread(stock, workingQueue);
+            Thread t = new CoreThread(workingQueue);
             threadList.add(t);
             t.start();
         }
