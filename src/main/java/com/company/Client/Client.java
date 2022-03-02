@@ -15,7 +15,13 @@ public class Client {
             JSONObject json = new JSONObject();
             json.put("Method", "query");
             json.put("toyName", "Tux");
-            oos.write(json.toString().getBytes());
+            oos.writeObject(json);
+            oos.flush();
+            double result = buf.read();
+            System.out.println(result);
+            flag = false;
         }
+
+        socket.close();
     }
 }
