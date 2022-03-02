@@ -27,7 +27,7 @@ public class MyBlockingQueue<T> {
         T t = null;
         try{
             while(deque.size() == 0){
-                read.wait();
+                read.await();
             }
             t = deque.pollFirst();
             write.signalAll();

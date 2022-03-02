@@ -13,15 +13,14 @@ public class Client {
         boolean flag = true;
         while(flag){
             JSONObject json = new JSONObject();
-            json.put("Method", "query");
+            json.put("Method", "buy");
             json.put("toyName", "Tux");
             oos.writeObject(json);
             oos.flush();
-            double result = buf.read();
+            String result = buf.readLine();
             System.out.println(result);
             flag = false;
         }
-
         socket.close();
     }
 }
