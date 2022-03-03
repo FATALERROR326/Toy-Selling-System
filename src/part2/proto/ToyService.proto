@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+//service
+
+service ToyService{
+    rpc query(Request) returns (Response);
+    rpc buy(Request) returns (Response);
+}
+
+message Request{
+    string toyName = 1;
+}
+
+message Response{
+    int32 stock = 1;
+    int32 success = 2;
+}

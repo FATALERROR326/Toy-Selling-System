@@ -10,14 +10,14 @@ import java.util.concurrent.locks.ReentrantLock;
  * This class maintains all the data accesses about toys
  */
 public class Stock {
-    private HashMap<String, Integer> dic; // used to store amount in stock
+    private ConcurrentHashMap<String, Integer> dic; // used to store amount in stock
     private HashMap<String, Toy> list; // used to store information of toy
     //Try to build a Read and Write lock. Only block writing operations when reading.
     //Block either reading or writing when writing
     private ReentrantLock lock; //TODO: is this necessary?
     private int state;// Record how many threads are trying to read
     public Stock(){
-        dic = new HashMap<>();
+        dic = new ConcurrentHashMap<>();
         list = new HashMap<>();
         lock = new ReentrantLock();
         state = 0;
@@ -58,6 +58,9 @@ public class Stock {
      * @return mark of having bought
      */
     public int buy(String toyName){
+        if(!dic.containsKey(toyName)) return -1;
+        dic.put(toyName, dic.get(toyName)-1);
+        if(dic.get(toyName) == 0) dic.remove(toyName);
         return 1;
     }
 }

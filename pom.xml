@@ -32,18 +32,18 @@
                             <includeMavenTypes>direct</includeMavenTypes>
 
                             <inputDirectories>
-                                <include>src/part2/main/proto</include>
+                                <include>src/part2/proto</include>
                             </inputDirectories>
 
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/part2/main/java/generate</outputDirectory>
+                                    <outputDirectory>src/part2/main/generate</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/part2/main/java/generate</outputDirectory>
+                                    <outputDirectory>src/part2/main/generate</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
