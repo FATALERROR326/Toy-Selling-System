@@ -36,6 +36,7 @@ public class Server {
         threadPool.start();
         while(true){
             Socket clientSocket = serverSocket.accept();
+            System.out.println("Receive the socket from: " + clientSocket.getInetAddress());
             //For every accepted socket, put it into the blocking queue with the runnable task
             threadPool.execute(new Handler(clientSocket, server.stock));
         }
