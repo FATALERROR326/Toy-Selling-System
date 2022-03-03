@@ -38,12 +38,12 @@
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/part2/main/generate</outputDirectory>
+                                    <outputDirectory>src/part2/java/grpc</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/part2/main/generate</outputDirectory>
+                                    <outputDirectory>src/part2/java/grpc</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>
