@@ -15,4 +15,5 @@ message Request{
 message Respond{
     float price = 1;
     int32 success = 2;
+    int32 stock = 3;
 }

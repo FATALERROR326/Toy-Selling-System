@@ -18,4 +18,10 @@ public interface RespondOrBuilder extends
    * @return The success.
    */
   int getSuccess();
+
+  /**
+   * <code>int32 stock = 3;</code>
+   * @return The stock.
+   */
+  int getStock();
 }

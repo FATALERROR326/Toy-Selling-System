@@ -58,6 +58,11 @@ private static final long serialVersionUID = 0L;
             success_ = input.readInt32();
             break;
           }
+          case 24: {
+
+            stock_ = input.readInt32();
+            break;
+          }
           default: {
             if (!parseUnknownField(
                 input, unknownFields, extensionRegistry, tag)) {
@@ -110,6 +115,16 @@ private static final long serialVersionUID = 0L;
     return success_;
   }
 
+  public static final int STOCK_FIELD_NUMBER = 3;
+  private int stock_;
+  /**
+   * <code>int32 stock = 3;</code>
+   * @return The stock.
+   */
+  public int getStock() {
+    return stock_;
+  }
+
   private byte memoizedIsInitialized = -1;
   @java.lang.Override
   public final boolean isInitialized() {
@@ -130,6 +145,9 @@ private static final long serialVersionUID = 0L;
     if (success_ != 0) {
       output.writeInt32(2, success_);
     }
+    if (stock_ != 0) {
+      output.writeInt32(3, stock_);
+    }
     unknownFields.writeTo(output);
   }
 
@@ -146,6 +164,10 @@ private static final long serialVersionUID = 0L;
     if (success_ != 0) {
       size += com.google.protobuf.CodedOutputStream
         .computeInt32Size(2, success_);
+    }
+    if (stock_ != 0) {
+      size += com.google.protobuf.CodedOutputStream
+        .computeInt32Size(3, stock_);
     }
     size += unknownFields.getSerializedSize();
     memoizedSize = size;
@@ -167,6 +189,8 @@ private static final long serialVersionUID = 0L;
             other.getPrice())) return false;
     if (getSuccess()
         != other.getSuccess()) return false;
+    if (getStock()
+        != other.getStock()) return false;
     if (!unknownFields.equals(other.unknownFields)) return false;
     return true;
   }
@@ -183,6 +207,8 @@ private static final long serialVersionUID = 0L;
         getPrice());
     hash = (37 * hash) + SUCCESS_FIELD_NUMBER;
     hash = (53 * hash) + getSuccess();
+    hash = (37 * hash) + STOCK_FIELD_NUMBER;
+    hash = (53 * hash) + getStock();
     hash = (29 * hash) + unknownFields.hashCode();
     memoizedHashCode = hash;
     return hash;
@@ -320,6 +346,8 @@ private static final long serialVersionUID = 0L;
 
       success_ = 0;
 
+      stock_ = 0;
+
       return this;
     }
 
@@ -348,6 +376,7 @@ private static final long serialVersionUID = 0L;
       net.grpc.Respond result = new net.grpc.Respond(this);
       result.price_ = price_;
       result.success_ = success_;
+      result.stock_ = stock_;
       onBuilt();
       return result;
     }
@@ -401,6 +430,9 @@ private static final long serialVersionUID = 0L;
       }
       if (other.getSuccess() != 0) {
         setSuccess(other.getSuccess());
+      }
+      if (other.getStock() != 0) {
+        setStock(other.getStock());
       }
       this.mergeUnknownFields(other.unknownFields);
       onChanged();
@@ -487,6 +519,36 @@ private static final long serialVersionUID = 0L;
     public Builder clearSuccess() {
       
       success_ = 0;
+      onChanged();
+      return this;
+    }
+
+    private int stock_ ;
+    /**
+     * <code>int32 stock = 3;</code>
+     * @return The stock.
+     */
+    public int getStock() {
+      return stock_;
+    }
+    /**
+     * <code>int32 stock = 3;</code>
+     * @param value The stock to set.
+     * @return This builder for chaining.
+     */
+    public Builder setStock(int value) {
+      
+      stock_ = value;
+      onChanged();
+      return this;
+    }
+    /**
+     * <code>int32 stock = 3;</code>
+     * @return This builder for chaining.
+     */
+    public Builder clearStock() {
+      
+      stock_ = 0;
       onChanged();
       return this;
     }
