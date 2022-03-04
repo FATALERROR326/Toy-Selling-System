@@ -76,8 +76,9 @@ public class Stock {
      */
     public Response buy(String toyName){
         if(!dic.containsKey(toyName)) return new Response(-1);
+        int stock = dic.get(toyName);
+        if(stock == 0) return new Response(0);
         dic.put(toyName, dic.get(toyName)-1);
-        if(dic.get(toyName) == 0) dic.remove(toyName);
         return new Response(1);
     }
 }

@@ -14,9 +14,13 @@ public class GrpcClient{
                 .usePlaintext()
                 .build();
         ToyServiceGrpc.ToyServiceBlockingStub stub = ToyServiceGrpc.newBlockingStub(channel);
-        Respond response = stub.query(Request.newBuilder().
-                setToyName("Tux")
-                .build());
+        for (int i = 0; i < 10; i++) {
+            Respond response = stub.buy(Request.newBuilder().
+                    setToyName("Elephant")
+                    .build());
+            System.out.println(response.getSuccess());
+        }
+
 //        ToyServiceOuterClass.Response response = stub.query(ToyServiceOuterClass.Request.newBuilder()
 //                .setToyName("Tux")
 //                .build());
