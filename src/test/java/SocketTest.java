@@ -1,10 +1,9 @@
-import com.company.Client.Client;
-import com.company.Client.RequstEntity;
+import com.company.client.Client;
+import com.company.client.RequstEntity;
 import com.google.code.tempusfugit.concurrency.ConcurrentRule;
 import com.google.code.tempusfugit.concurrency.RepeatingRule;
 import com.google.code.tempusfugit.concurrency.annotations.Concurrent;
 import com.google.code.tempusfugit.concurrency.annotations.Repeating;
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 
@@ -18,11 +17,11 @@ public class SocketTest {
 
     @Test
     @Concurrent(count = 100)
-//    @Repeating(repetition = 2)
-    public void test() throws IOException {
-        long stime = System.currentTimeMillis();
+    @Repeating(repetition = 2)
+    public void test() {
+        long startTime = System.currentTimeMillis();
         String result = Client.runSocket(new RequstEntity("query", "Tux"));
         long etime = System.currentTimeMillis();
-        System.out.println(etime - stime + " after, the result is: " + result);
+        System.out.println(etime - startTime + " after, the result is: " + result);
     }
 }

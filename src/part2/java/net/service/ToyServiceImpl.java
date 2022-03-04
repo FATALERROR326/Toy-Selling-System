@@ -37,16 +37,4 @@ public class ToyServiceImpl extends ToyServiceGrpc.ToyServiceImplBase{
         responseObserver.onCompleted();
 
     }
-
-    //    @Override
-//    public void buy(ToyServiceOuterClass.Request request, StreamObserver<ToyServiceOuterClass.Response> responseObserver) {
-//        String toyName = request.getToyName();
-//        Stock stock = Stock.getInstance();
-//        Response res = stock.buy(toyName);
-//        response.setSuccess(res.state).setPrice((float) stock.getPrice(toyName));
-//    }
-
-
-
-
 }

@@ -10,8 +10,10 @@ import com.company.utils.MyThreadPool;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Logger;
 
 public class Server {
+    private static final Logger logger = Logger.getLogger(Server.class.getName());
     public Stock stock;
     public static final int CORE_SIZE = 3;
     public ServerSocket serverSocket;
@@ -31,6 +33,7 @@ public class Server {
                 new MyBlockingQueue<Runnable>(20)
         );
         threadPool.start();
+        logger.info("Server started.");
         while(true){
             Socket clientSocket = serverSocket.accept();
             System.out.println("Receive the socket from: " + clientSocket.getInetAddress());

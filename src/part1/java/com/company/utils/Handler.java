@@ -2,15 +2,14 @@ package com.company.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.company.Products.Stock;
-import net.utils.Response;
 
 import java.io.*;
 import java.net.Socket;
 
 
 public class Handler implements Runnable {
-    private Socket client;
-    private Stock stock;
+    private final Socket client;
+    private final Stock stock;
     public Handler(Socket client, Stock stock){
         this.stock = stock;
         this.client = client;
@@ -24,29 +23,25 @@ public class Handler implements Runnable {
             boolean flag = true;
 
             while(flag){
+                //Get json object from client socket input
                 JSONObject json = (JSONObject) ois.readObject();
                 if(json == null || json.isEmpty()) flag = false;
                 else{
-                    int result = 0;
-                    String method = json.getString("Method"),
-                            toyName = json.getString("toyName");
+                    String method = json.getString("Method");
+                    String toyName = json.getString("toyName");
                     if(method.equals("query")){
                         Response response = query(toyName);
-                        if(response.state != 1) out.println("From Server: "+ response.state);
-                        else out.println("From Server: "+ response.price);
-
+                        if(response.getState() != 1) out.println(response.getState());
+                        else out.println(response.getPrice());
                     }
                     else if(method.equals("buy")){
                         Response response = buy(toyName);
-                        out.println("From Server: "+response.state);
+                        out.println(response.getState());
                     }
-
                 }
-
-
             }
         }catch (Exception e){
-
+            e.printStackTrace();
         }
     }
     @Override

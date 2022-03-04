@@ -1,8 +1,8 @@
-package com.company.Client;
+package com.company.client;
 
 public class RequstEntity {
-    String method;
-    String toyName;
+    private String method;
+    private String toyName;
 
     public RequstEntity(String method, String toyName) {
         this.method = method;
