@@ -1,7 +1,6 @@
 package com.company.Server;
 
 import com.company.Products.Stock;
-import com.company.Products.Toy;
 import com.company.Products.Tux;
 import com.company.Products.Whale;
 import com.company.utils.Handler;
@@ -9,13 +8,11 @@ import com.company.utils.MyBlockingQueue;
 import com.company.utils.MyThreadPool;
 
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.concurrent.ArrayBlockingQueue;
 
 public class Server {
-    public volatile Stock stock;
+    public Stock stock;
     public static final int CORE_SIZE = 3;
     public ServerSocket serverSocket;
     public Server() throws IOException {

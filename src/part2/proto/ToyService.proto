@@ -1,17 +1,18 @@
 syntax = "proto3";
-
+option java_multiple_files = true;
+option java_package = "net.grpc";
 //service
 
 service ToyService{
-    rpc query(Request) returns (Response);
-    rpc buy(Request) returns (Response);
+    rpc query(Request) returns (Respond);
+    rpc buy(Request) returns (Respond);
 }
 
 message Request{
     string toyName = 1;
 }
 
-message Response{
-    int32 stock = 1;
+message Respond{
+    float price = 1;
     int32 success = 2;
 }
