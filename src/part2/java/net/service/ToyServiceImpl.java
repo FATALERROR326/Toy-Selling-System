@@ -20,6 +20,7 @@ public class ToyServiceImpl extends ToyServiceGrpc.ToyServiceImplBase{
         responseObserver.onNext(Respond
                 .newBuilder()
                 .setPrice((float) res.price)
+                .setStock(res.stock)
                 .setSuccess(res.state)
                 .build());
         responseObserver.onCompleted();

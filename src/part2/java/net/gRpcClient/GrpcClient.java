@@ -32,24 +32,24 @@ public class GrpcClient{
                 .build();
         ToyServiceGrpc.ToyServiceBlockingStub stub = ToyServiceGrpc.newBlockingStub(channel);
 
-
-        for (int i = 0; i < 10; i++) {
+        //Send requests concurrently
+        for (int i = 0; i < 20; i++) {
             //modify the method name here stub.buy or stub.query
-            if(i % 2 == 0){
+            if(i % 2 == 1){
                 new Thread(()->{
                     Respond response = stub.buy(Request.newBuilder()
-                            .setToyName("Elephant")
+                            .setToyName("Tux")
                             .build());
                     System.out.println(response.getSuccess());
                     CDL.countDown();
                 }).start();
             }
-            if(i % 2 == 1){
+            if(i % 2 == 0){
                 new Thread(()->{
                     Respond response = stub.query(Request.newBuilder()
-                            .setToyName("Elephant")
+                            .setToyName("Tux")
                             .build());
-                    System.out.println("Item price: "+response.getPrice()+". Stock: "+response.getStock());
+                    System.out.println("Item price: "+response.getPrice()+", Stock: "+response.getStock());
                     CDL.countDown();
                 }).start();
             }

@@ -5,7 +5,6 @@ import net.utils.Response;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * This class maintains all the data accesses about toys
@@ -51,7 +50,8 @@ public class Stock {
      */
     public Response query(String toyName){
         if(!dic.containsKey(toyName)) return new Response(-1);
-        if(dic.get(toyName) <= 0) return new Response(0, getPrice(toyName), dic.get(toyName));
+
+        if(dic.get(toyName) <= 0) return new Response(0, getPrice(toyName), 0);
         else return new Response(1, getPrice(toyName), dic.get(toyName));
     }
 
