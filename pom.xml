@@ -14,8 +14,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
+                    <source>1.8</source>
+                    <target>1.8</target>
                 </configuration>
             </plugin>
             <plugin>
@@ -30,20 +30,18 @@
                         </goals>
                         <configuration>
                             <includeMavenTypes>direct</includeMavenTypes>
-
                             <inputDirectories>
                                 <include>src/part2/proto</include>
                             </inputDirectories>
-
                             <outputTargets>
                                 <outputTarget>
                                     <type>java</type>
-                                    <outputDirectory>src/part2/java/net/grpc</outputDirectory>
+                                    <outputDirectory>src/part2/java</outputDirectory>
                                 </outputTarget>
                                 <outputTarget>
                                     <type>grpc-java</type>
                                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.15.0</pluginArtifact>
-                                    <outputDirectory>src/part2/java/net/grpc</outputDirectory>
+                                    <outputDirectory>src/part2/java</outputDirectory>
                                 </outputTarget>
                             </outputTargets>
                         </configuration>

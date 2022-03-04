@@ -2,6 +2,7 @@ package com.company.utils;
 
 import com.alibaba.fastjson.JSONObject;
 import com.company.Products.Stock;
+import net.utils.Response;
 
 import java.io.*;
 import java.net.Socket;
@@ -26,19 +27,20 @@ public class Handler implements Runnable {
                 JSONObject json = (JSONObject) ois.readObject();
                 if(json == null || json.isEmpty()) flag = false;
                 else{
-                    double result = 0.0;
+                    int result = 0;
                     String method = json.getString("Method"),
                             toyName = json.getString("toyName");
                     if(method.equals("query")){
-                        result = (double) query(toyName);
+                        Response response = query(toyName);
+                        if(response.state != 1) out.println("From Server: "+ response.state);
+                        else out.println("From Server: "+ response.price);
+
                     }
                     else if(method.equals("buy")){
-                        result = (double) buy(toyName);
+                        Response response = buy(toyName);
+                        out.println("From Server: "+response.state);
                     }
-                    else if(method.equals("getPrice")){
-                        result = getPrice(toyName);
-                    }
-                    out.println("From Server: "+result);
+
                 }
 
 
@@ -51,13 +53,10 @@ public class Handler implements Runnable {
     public void run() {
         excute(client);
     }
-    public int buy(String toyName){
+    public Response buy(String toyName){
         return stock.buy(toyName);
     }
-    public int query(String toyName){
-        return stock.getStock(toyName);
-    }
-    public double getPrice(String toyName){
-        return stock.getPrice(toyName);
+    public Response query(String toyName){
+        return stock.query(toyName);
     }
 }

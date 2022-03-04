@@ -1,8 +1,8 @@
 package com.company.Products;
 
-import java.util.ArrayList;
+import net.utils.Response;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -23,6 +23,20 @@ public class Stock {
         state = 0;
     }
 
+    //Singleton mode to get instance
+    public volatile static Stock instance = null;
+
+    public static Stock getInstance(){
+        if(instance == null){
+            synchronized (Stock.class){
+                if(instance == null){
+                    instance = new Stock();
+                }
+            }
+        }
+        return instance;
+    }
+
     /**
      * Register a new toy
      * @param toy details of toy
@@ -38,9 +52,11 @@ public class Stock {
      * @param toyName the name Key of toy
      * @return current toy number, -1 if not existed
      */
-    public int getStock(String toyName){
-        if(!dic.containsKey(toyName)) return -1;
-        else return dic.get(toyName);
+    public Response query(String toyName){
+        if(!dic.containsKey(toyName)) return new Response(-1);
+        int stock = dic.get(toyName);
+        if(stock == 0) return new Response(0);
+        else return new Response(1, getPrice(toyName));
     }
 
     /**
@@ -57,10 +73,10 @@ public class Stock {
      * @param toyName given toy name
      * @return mark of having bought
      */
-    public int buy(String toyName){
-        if(!dic.containsKey(toyName)) return -1;
+    public Response buy(String toyName){
+        if(!dic.containsKey(toyName)) return new Response(-1);
         dic.put(toyName, dic.get(toyName)-1);
         if(dic.get(toyName) == 0) dic.remove(toyName);
-        return 1;
+        return new Response(1);
     }
 }
