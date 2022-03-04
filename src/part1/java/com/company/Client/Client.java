@@ -18,7 +18,6 @@ public class Client {
         try (Socket socket = new Socket("127.0.0.1", 8088)) {
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             BufferedReader buf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
             while (flag) {
                 JSONObject json = new JSONObject();
                 json.put("Method", "query");
