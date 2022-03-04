@@ -25,15 +25,21 @@ public class GrpcClient{
             host = args[0];
             port = Integer.parseInt(args[1]);
         }
-        CountDownLatch CDL = new CountDownLatch(10);
+
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 8088)
                 .usePlaintext()
                 .build();
         ToyServiceGrpc.ToyServiceBlockingStub stub = ToyServiceGrpc.newBlockingStub(channel);
+        CountDownLatch CDL = new CountDownLatch(10);
+        send(stub, CDL);
+        CDL.await();
 
+        channel.shutdown();
+    }
+    public static void send(ToyServiceGrpc.ToyServiceBlockingStub stub, CountDownLatch CDL){
         //Send requests concurrently
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 250; i++) {
             //modify the method name here stub.buy or stub.query
             if(i % 2 == 1){
                 new Thread(()->{
@@ -54,9 +60,6 @@ public class GrpcClient{
                 }).start();
             }
         }
-        CDL.await();
-
-        channel.shutdown();
     }
 
 

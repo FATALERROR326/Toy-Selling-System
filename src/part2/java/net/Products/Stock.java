@@ -50,8 +50,7 @@ public class Stock {
      */
     public Response query(String toyName){
         if(!dic.containsKey(toyName)) return new Response(-1);
-
-        if(dic.get(toyName) <= 0) return new Response(0, getPrice(toyName), 0);
+        if(dic.get(toyName) <= 0) return new Response(0, getPrice(toyName), dic.get(toyName));
         else return new Response(1, getPrice(toyName), dic.get(toyName));
     }
 

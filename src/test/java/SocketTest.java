@@ -1,5 +1,5 @@
-//import com.company.client.Client;
-//import com.company.client.RequstEntity;
+//import com.company.Client.Client;
+//import com.company.Client.RequestEntity;
 //import com.google.code.tempusfugit.concurrency.ConcurrentRule;
 //import com.google.code.tempusfugit.concurrency.RepeatingRule;
 //import com.google.code.tempusfugit.concurrency.annotations.Concurrent;
@@ -7,7 +7,7 @@
 //import org.junit.Rule;
 //import org.junit.Test;
 //
-//import java.io.IOException;
+//import java.util.concurrent.TimeUnit;
 //
 //public class SocketTest {
 //    @Rule
@@ -16,12 +16,20 @@
 //    public RepeatingRule repeatingly = new RepeatingRule();
 //
 //    @Test
-//    @Concurrent(count = 100)
-//    @Repeating(repetition = 2)
+//    @Concurrent(count = 10)
+//    @Repeating(repetition = 1)
 //    public void test() {
 //        long startTime = System.currentTimeMillis();
-//        String result = Client.runSocket(new RequstEntity("query", "Tux"));
+//        String result = Client.runSocket(new RequestEntity("query", "Tux"));
 //        long etime = System.currentTimeMillis();
-//        System.out.println(etime - startTime + " after, the result is: " + result);
+//        System.out.println(etime - startTime + "ms later, the result is: " + result);
+//    }
+//
+//    @Test
+//    @Concurrent(count = 5)
+//    @Repeating(repetition = 2)
+//    public void testGrpc() {
+////        long startTime = System.currentTimeMillis();
+////        String result =
 //    }
 //}
