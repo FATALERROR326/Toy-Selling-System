@@ -10,8 +10,9 @@ import java.io.IOException;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 
 public class GrpcServer {
-    public final static int DEFAULT_THREADS = 3;
+    final static int DEFAULT_THREADS = 3;
     static int MAX_THREADS;
+    //args[0]: max core thread size of the dynamic threadpool
     public static void main(String[] args) throws IOException, InterruptedException {
         if(args.length == 0){
             MAX_THREADS = DEFAULT_THREADS;
