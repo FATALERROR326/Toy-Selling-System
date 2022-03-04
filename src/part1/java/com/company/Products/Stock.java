@@ -1,6 +1,6 @@
 package com.company.Products;
 
-import net.utils.Response;
+import com.company.utils.Response;
 
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
@@ -12,14 +12,10 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Stock {
     private ConcurrentHashMap<String, Integer> dic; // used to store amount in stock
     private HashMap<String, Toy> list; // used to store information of toy
-    //Try to build a Read and Write lock. Only block writing operations when reading.
-    //Block either reading or writing when writing
-    private ReentrantLock lock; //TODO: is this necessary?
     private int state;// Record how many threads are trying to read
     public Stock(){
         dic = new ConcurrentHashMap<>();
         list = new HashMap<>();
-        lock = new ReentrantLock();
         state = 0;
     }
 
@@ -69,7 +65,6 @@ public class Stock {
     }
 
     /**
-     * TODO: make sure if it is necessary
      * @param toyName given toy name
      * @return mark of having bought
      */

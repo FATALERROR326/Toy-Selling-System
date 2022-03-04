@@ -7,15 +7,19 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MyBlockingQueue<T> {
-    private int SIZE;
-    private Deque<T> deque;
-    private Lock lock;
+    private final int size;
+    private final Deque<T> deque;
+    private final Lock lock;
     Condition read;
     Condition write;
 
+    /**
+     * Lazy loading blocking queue
+     * @param size
+     */
     public MyBlockingQueue(int size) {
-        SIZE = size;
-        deque = new ArrayDeque<T>();
+        this.size = size;
+        deque = new ArrayDeque<>();
         lock = new ReentrantLock();
         read = lock.newCondition();
         write = lock.newCondition();
@@ -26,30 +30,35 @@ public class MyBlockingQueue<T> {
         lock.lockInterruptibly();
         T t = null;
         try{
-            while(deque.size() == 0){
+            while(deque.isEmpty()){
                 read.await();
             }
             t = deque.pollFirst();
             write.signalAll();
-        }catch (Exception e){
-
-        }finally{
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally{
             lock.unlock();
-            return t;
         }
+        return t;
     }
+
     public void put(T t) throws InterruptedException {
         //Put a task into the queue if queue is not full or the thread will be blocked
         lock.lock();
         try{
-            while(deque.size() == SIZE){
+            while(deque.size() == size){
                 write.await();
             }
             deque.addLast(t);
             read.signalAll();
-        }catch (Exception e){
-
-        }finally {
+        } catch (InterruptedException e){
+            Thread.currentThread().interrupt();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             lock.unlock();
         }
     }
