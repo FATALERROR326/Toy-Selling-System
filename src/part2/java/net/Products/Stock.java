@@ -51,9 +51,8 @@ public class Stock {
      */
     public Response query(String toyName){
         if(!dic.containsKey(toyName)) return new Response(-1);
-        int stock = dic.get(toyName);
-        if(stock == 0) return new Response(0);
-        else return new Response(1, getPrice(toyName));
+        if(dic.get(toyName) <= 0) return new Response(0, getPrice(toyName), dic.get(toyName));
+        else return new Response(1, getPrice(toyName), dic.get(toyName));
     }
 
     /**
@@ -71,8 +70,8 @@ public class Stock {
      */
     public Response buy(String toyName){
         if(!dic.containsKey(toyName)) return new Response(-1);
-        int stock = dic.get(toyName);
-        if(stock == 0) return new Response(0);
+
+        if(dic.get(toyName) <= 0) return new Response(0);
         dic.put(toyName, dic.get(toyName)-1);
         return new Response(1);
     }

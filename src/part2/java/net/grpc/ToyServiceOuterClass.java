@@ -34,10 +34,10 @@ public final class ToyServiceOuterClass {
   static {
     java.lang.String[] descriptorData = {
       "\n\020ToyService.proto\"\032\n\007Request\022\017\n\007toyName" +
-      "\030\001 \001(\t\")\n\007Respond\022\r\n\005price\030\001 \001(\002\022\017\n\007succ" +
-      "ess\030\002 \001(\0052D\n\nToyService\022\033\n\005query\022\010.Reque" +
-      "st\032\010.Respond\022\031\n\003buy\022\010.Request\032\010.RespondB" +
-      "\014\n\010net.grpcP\001b\006proto3"
+      "\030\001 \001(\t\"8\n\007Respond\022\r\n\005price\030\001 \001(\002\022\017\n\007succ" +
+      "ess\030\002 \001(\005\022\r\n\005stock\030\003 \001(\0052D\n\nToyService\022\033" +
+      "\n\005query\022\010.Request\032\010.Respond\022\031\n\003buy\022\010.Req" +
+      "uest\032\010.RespondB\014\n\010net.grpcP\001b\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -54,7 +54,7 @@ public final class ToyServiceOuterClass {
     internal_static_Respond_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Respond_descriptor,
-        new java.lang.String[] { "Price", "Success", });
+        new java.lang.String[] { "Price", "Success", "Stock", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

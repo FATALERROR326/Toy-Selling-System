@@ -6,6 +6,8 @@ import net.grpc.Request;
 import net.grpc.Respond;
 import net.grpc.ToyServiceGrpc;
 
+import java.util.concurrent.CountDownLatch;
+
 public class GrpcClient{
     static String host;
     static int port;
@@ -14,7 +16,7 @@ public class GrpcClient{
     static final String DEFAULT_HOST = "localhost";
     static final int DEFAULT_PORT = 8088;
     //args[0]: host args[1]: port
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         if(args.length == 0){
             host = DEFAULT_HOST;
             port = DEFAULT_PORT;
@@ -23,6 +25,7 @@ public class GrpcClient{
             host = args[0];
             port = Integer.parseInt(args[1]);
         }
+        CountDownLatch CDL = new CountDownLatch(10);
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress("localhost", 8088)
                 .usePlaintext()
@@ -32,11 +35,26 @@ public class GrpcClient{
 
         for (int i = 0; i < 10; i++) {
             //modify the method name here stub.buy or stub.query
-            Respond response = stub.buy(Request.newBuilder()
-                    .setToyName("Elephant")
-                    .build());
-            System.out.println(response.getSuccess());
+            if(i % 2 == 0){
+                new Thread(()->{
+                    Respond response = stub.buy(Request.newBuilder()
+                            .setToyName("Elephant")
+                            .build());
+                    System.out.println(response.getSuccess());
+                    CDL.countDown();
+                }).start();
+            }
+            if(i % 2 == 1){
+                new Thread(()->{
+                    Respond response = stub.query(Request.newBuilder()
+                            .setToyName("Elephant")
+                            .build());
+                    System.out.println("Item price: "+response.getPrice()+". Stock: "+response.getStock());
+                    CDL.countDown();
+                }).start();
+            }
         }
+        CDL.await();
 
         channel.shutdown();
     }
