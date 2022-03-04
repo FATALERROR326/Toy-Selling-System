@@ -7,30 +7,31 @@ import java.net.Socket;
 import java.util.concurrent.CountDownLatch;
 
 public class Client {
-    public static void main(String[] args) throws IOException, InterruptedException {
-        final CountDownLatch CDL = new CountDownLatch(5);
-        Socket socket = new Socket("127.0.0.1", 8088);
-
-        ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-        BufferedReader buf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    public static void main(String[] args) throws IOException {
+        runSocket(new RequstEntity("query", "Tux"));
+    }
+    public static String runSocket(RequstEntity requst) throws IOException {
+//        final CountDownLatch CDL = new CountDownLatch(5);
         boolean flag = true;
-        while(flag){
+        String result = "";
 
-            for(int i=0; i<5; i++){
+        try (Socket socket = new Socket("127.0.0.1", 8088)) {
+            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+            BufferedReader buf = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            while (flag) {
                 JSONObject json = new JSONObject();
                 json.put("Method", "query");
                 json.put("toyName", "Tux");
                 oos.writeObject(json);
                 oos.flush();
-                String result = buf.readLine();
-                System.out.println(result);
+                result = buf.readLine();
+                flag = false;
             }
-
-
-            flag = false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        socket.close();
+        return result;
     }
 
 }
