@@ -9,9 +9,6 @@ import net.utils.Response;
 
 public class ToyServiceImpl extends ToyServiceGrpc.ToyServiceImplBase{
 
-
-
-
     @Override
     public void query(Request request, StreamObserver<Respond> responseObserver) {
         String toyName = request.getToyName();

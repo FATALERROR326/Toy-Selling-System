@@ -22,8 +22,8 @@ public class GrpcServer {
         Stock stock = Stock.getInstance();
         stock.register(new Tux("Tux", (float) 29.9), 100);
         stock.register(new Whale("Whale", (float) 39.9), 100);
-        stock.register(new Elephant("Elephant", (float) 49.9), 5);
-        stock.register(new Bird("Bird", (float) 19.9), 0);
+        stock.register(new Elephant("Elephant", (float) 49.9), 100);
+        stock.register(new Bird("Bird", (float) 19.9), 100);
         Server server = ServerBuilder
                 .forPort(8088)
                 .addService(new ToyServiceImpl())
@@ -31,7 +31,7 @@ public class GrpcServer {
                 .build();
         server.start();
 
-        System.out.println("Server started on " + server.getPort());
+        System.out.println("Server started on " + server.getPort() + " with maximum thread pool size of " + MAX_THREADS);
         server.awaitTermination();
     }
 
