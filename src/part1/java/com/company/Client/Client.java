@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 public class Client {
     private static final Logger logger = Logger.getLogger(Client.class.getName());
     private static final String IP_ADDRESS_DEFAULT = "127.0.0.1";
-    private static final int PORT_DEFAULT = 8088;
+    private static final int PORT_DEFAULT = 6066;
     /**
      * Command line entry for client
      * @param args cmd args

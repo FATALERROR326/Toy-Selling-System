@@ -1,29 +1,27 @@
 package net.gRpcClient;
 
-import com.company.Client.RequestEntity;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import net.grpc.Request;
 import net.grpc.Respond;
 import net.grpc.ToyServiceGrpc;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.logging.Logger;
 
 public class GrpcClient{
     private static final Logger logger = Logger.getLogger(GrpcClient.class.getName());
     static final String DEFAULT_HOST = "localhost";
-    static final int DEFAULT_PORT = 8088;
+    static final int DEFAULT_PORT = 7077;
     //args[0]: host args[1]: port
     public static void main(String[] args) throws InterruptedException {
         if(args.length == 0) {
-            logger.info(runGRPC(new RequestEntity("Method", "Tux")));
+            logger.info(runGRPC(new RequestGRPCEntity("Method", "Tux")));
         } else {
-            logger.info(runGRPC(new RequestEntity("Method", "Tux"), args[0], Integer.parseInt(args[1])));
+            logger.info(runGRPC(new RequestGRPCEntity("Method", "Tux"), args[0], Integer.parseInt(args[1])));
         }
     }
 
-    public static String runGRPC(RequestEntity request, String host, int port) {
+    public static String runGRPC(RequestGRPCEntity request, String host, int port) {
         ManagedChannel channel = ManagedChannelBuilder
                 .forAddress(host, port)
                 .usePlaintext()
@@ -48,7 +46,7 @@ public class GrpcClient{
                 + ", successFlag: " + response.getSuccess() + ".";
     }
 
-    public static String runGRPC(RequestEntity request) {
+    public static String runGRPC(RequestGRPCEntity request) {
         return runGRPC(request, DEFAULT_HOST, DEFAULT_PORT);
     }
 

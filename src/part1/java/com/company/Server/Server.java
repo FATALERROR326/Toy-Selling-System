@@ -14,7 +14,7 @@ import java.util.logging.Logger;
 
 public class Server {
     private static final Logger logger = Logger.getLogger(Server.class.getName());
-    private static final int PORT_NUM_DEFAULT = 8088;
+    private static final int PORT_NUM_DEFAULT = 6066;
     public static final int CORE_SIZE_DEFAULT = 3;
 
     public Stock stock;
@@ -22,8 +22,8 @@ public class Server {
     public Server(int portNum) throws IOException {
         serverSocket = new ServerSocket(portNum);
         stock = new Stock();
-        stock.register(new Tux("Tux", (float) 29.9), 100);
-        stock.register(new Whale("Whale", (float) 39.9), 100);
+        stock.register(new Tux("Tux", (float) 29.9), 0);
+        stock.register(new Whale("Whale", (float) 39.9), 0);
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
