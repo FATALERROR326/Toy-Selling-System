@@ -25,3 +25,4 @@ If you are using command line OS, here are the steps for you:
 
 The second approach might be confusing because we encountered obstacles in both simply making package and simply compiling the class. If there would still be any problem, please contact us either by email or through piazza. Thank you for your effort!
 :smile:
+ 
