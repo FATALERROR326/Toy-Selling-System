@@ -11,7 +11,7 @@ The MyBlockingQueue class is what queues them. The MyThreadPool has a blocking q
 
 The MyThreadPool is easy to explain now. Since it is a static number thread pool, it will start all threads in a row upon initialization, with each thread activated for retrieving new tasks to work on till the whole server to shut down.
 The overall structure is depicted on the graph above.
-Part 2.
+## Part 2.
 Part 2 is built on the gRPC, so most multithreading work are done by it. Here we defined two services in the protocol buffer, which are the query and buy. They are implemented in a similar way of operating on the stock discussed in part 1. To make sure the stock invoked by the gRPC method is the same each time, here we applied a double check singleton design pattern to it.
 Test.
 We applied JUnit and tempus-fugit to concurrently test both parts. The test code is also included in our GitHub repo.
